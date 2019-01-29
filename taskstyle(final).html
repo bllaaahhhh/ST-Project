@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<title>Online personal diary</title>
+<style>
+li{
+padding-top:10px;
+
+}
+.add
+{
+padding : 5px 40px 5px 5px;
+font-weight : bold;
+font-size : 18px;
+}
+.deleteButton
+{
+padding : 10px 12px 5px 20px;
+
+}
+.editButton
+{
+padding : 10px 20px 5px 15px;
+
+
+}
+.leftdiv
+{
+display:inline-block;
+//background-color: #2199D3;
+background : url("scenery22.jpg") no-repeat left;
+background-size : 100% 750px;
+width:49.5%;
+height : 750px;
+padding-left : 10px; 
+}
+.rightdiv
+{
+display:inline-block;
+height : 750px;
+width:49.5%;
+float:right;
+//background-color:blue;
+background : url("scenery21.jpg") no-repeat left;
+background-size : 100% 750px;
+width:49.5%;
+height : 750px;
+//padding-top : 20px; 
+}
+</style>
+</head>
+<body>
+
+
+
+<div id="left" class="leftdiv">																																																	<!--  left division -->
+<!--	<h1 style="color:#AB358B"> ADD TASK </h1>   -->
+
+<p style="padding-left:10px;text-align:center"><button onclick="show()" style="width:100px;height:30px">Add Task</button></p><br>
+<input type="text" id="taskn" style="visibility:hidden;width:350px; padding-left: 5px" placeholder="task" >
+<input type="time" id="tdate" style="visibility:hidden" >
+<input type="submit" id="submit" style="visibility:hidden" onclick="add()" value="submit" />
+
+<pre style="color:#F2FE28;font-size:50px;font-family:serif	"><b><u>  MY TASKS</b>	</pre>
+
+<ul id="list">
+ <li style="visibility:hidden"></li>
+</ul>
+</div>
+
+
+<div id="image" class="rightdiv">
+
+</div>
+
+
+<div id="right" class="rightdiv" style="text-align:center;display:none" >																<!--  right division -->
+
+<input type="text" id="taskEdit"  style="position:relative;top:20px;width:350px; height: 30px " placeholder=" enter edited task" /><br><br>
+<input type="time" id="dateEdit" style="position:relative;top:30px;height:30px;" ><br><br>
+
+</div>
+
+
+
+<script>
+var close = document.getElementsByClassName("deleteButton");
+var editclass = document.getElementsByClassName("editButton");
+var editb =document.getElementById("submitEdit");
+var texts = document.getElementsByClassName("add");
+var Final = document.getElementsByTagName("LI");
+var i;
+function add()
+{
+if(document.getElementById("taskn").value=="" || document.getElementById("tdate").value=="")
+{
+alert("enter all details");
+}
+else
+{
+	var task = document.createElement("LI");
+	var textspan=document.createElement("SPAN");
+	textspan.className="add";
+	var temp= document.createTextNode(document.getElementById("taskn").value);  												//text span
+	document.getElementById("taskn").value = "";
+	textspan.appendChild(temp);
+	task.appendChild(textspan);
+	document.getElementById("list").appendChild(task);
+
+
+
+
+	var span=document.createElement("SPAN");
+	span.className="deleteButton";
+	var btn = document.createElement("BUTTON");																									//delete button
+	var t = document.createTextNode("Delete");
+	btn.appendChild(t);
+	span.appendChild(btn);
+	task.appendChild(span);
+
+
+
+	for (i = 0; i < close.length; i++) {
+		close[i].onclick = function() {
+		  var div = this.parentElement;
+		  div.style.display = "none";
+		}
+	  }
+
+
+	var edit=document.createElement("SPAN");
+	edit.className="editButton";
+	var btn0 = document.createElement("BUTTON");																						//edit button
+	var t0 = document.createTextNode("Edit");
+	btn0.appendChild(t0);
+	edit.appendChild(btn0);
+	task.appendChild(edit);
+
+	var j;
+	for (j = 0; j < editclass.length; j++) {
+		editclass[j].onclick = function() {
+		//document.getElementById("left").style.width="49.5%";
+		  document.getElementById("image").style.display="none";
+		  document.getElementById("right").style.display="inline-block";
+		 var  temp = document.createElement("BUTTON");
+		 temp.style.position="relative";
+		 temp.style.top="40px";
+		 temp.style.height="30px";
+		 var temptext = document.createTextNode("Submit");
+		 temp.appendChild(temptext);
+		 document.getElementById("right").appendChild(temp);
+		 temp.onclick = function() {
+		 if(document.getElementById("taskEdit").value=="" || document.getElementById("dateEdit").value=="" )
+			{
+				alert("enter all details");
+			}
+			else
+			{
+				var  taske=	document.getElementById("taskEdit").value;
+				 Final[j].childNodes[0].textContent=taske;
+				 Final[j].childNodes[3].textContent=document.getElementById("dateEdit").value;;
+				 document.getElementById("right").style.display="none";
+				 document.getElementById("image").style.display="inline-block";
+				 document.getElementById("taskn").value = "";
+				 temp.remove();
+		 }
+		 }
+		}
+	  }
+
+	var span2=document.createElement("SPAN");
+	span2.className="add";
+	//span2.style.color="#FFFFFF";
+	//var btn2 = document.createElement("TEXT");
+	var t2 = document.createTextNode(document.getElementById("tdate").value);										//time span
+	//btn2.appendChild(t2);
+	span2.appendChild(t2);
+	task.appendChild(span2);
+	document.getElementById("tdate").value = "";
+
+	hide();
+}
+}
+
+
+function show()
+{
+document.getElementById("taskn").style.visibility="visible";
+document.getElementById("submit").style.visibility="visible";
+document.getElementById("tdate").style.visibility="visible";
+}
+function hide()
+{
+document.getElementById("taskn").style.visibility="hidden";
+document.getElementById("submit").style.visibility="hidden";
+document.getElementById("tdate").style.visibility="hidden";
+}
+function showedit(i)
+{
+var i;
+
+}
+
+
+</script>
+
+</body>
+</html>

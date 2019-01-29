@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online personal diary</title>
+<style>
+body 
+{
+background : url("loginBackground.jpg") no-repeat fixed center;
+}
+#maindiv
+{
+background-color : rgba(255,255,255,0.5) ;
+width : 330px;
+height : 400px;
+position : relative;
+right : 150px;
+top : 120px;
+float : right;
+padding : 40px;
+}
+#username
+{
+position : relative;
+top:	 40px;
+display: block;
+ margin-left: auto;
+ margin-right: auto;
+ 
+ width : 200px;
+ height : 25px;
+}
+#pswd
+{
+position : relative;
+top:	 65px;
+display: block;
+ margin-left: auto;
+ margin-right: auto;
+ 
+ width : 200px;
+ height : 25px;
+}
+#submit
+{
+position : relative;
+top:	 95px;
+display: block;
+ margin-left: auto;
+ margin-right: auto;
+ //width : 200px;
+height : 30px;
+}
+</style>
+</head>
+<body>
+<div id="maindiv">
+<img src="admin.jpg" width="130px" height="130px" style="	display: block; margin-left: auto;margin-right: auto; opacity : 100%;"><br>
+<input type="text" id="username" placeholder="username" >
+<input type="password" id="pswd" placeholder="password" >
+<input type="submit" id="submit" onclick="sub()" value="submit" />
+</div> 
+
+
+
+<script>
+function sub()
+{
+var x=document.getElementById("username").value;
+var y=document.getElementById("pswd").value;
+if(x!="admin" || y!="root")
+	{
+		alert("Invalid username/password!");
+	}
+else
+	{
+		window.location.href="page2.html";
+	}
+}
+
+</script>
+</body>
+</html>
+ 

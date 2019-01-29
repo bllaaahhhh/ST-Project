@@ -1,0 +1,271 @@
+<html>
+<title>
+	My personal Diary
+</title>
+<style>
+ul li 
+{
+	padding:10px 10px 10px 10px;
+	font-size: 18px;
+	color: white;
+	
+}
+h2
+{
+	margin-left: 30px;
+	text-align: center;
+	color: white;
+}
+#myinp {
+	margin:0;
+	border:none;
+	width:300px;
+	padding:10px;
+	float:left;
+	font-size:18px;
+}
+
+#myhidinp1
+{
+    margin:0;
+	border:none;
+	width:300px;
+	padding:10px;
+	float:left;
+	font-size:18px;
+    display:none;
+}
+#myhidinp2
+{
+    display:none;
+    margin:0;
+	border:none;
+	width:300px;
+	padding:10px;
+	float:left;
+	font-size:18px;
+}
+.header {
+	padding: 30px 45px;
+	color:white;
+	text-align: center;  
+}
+.header:after {
+	content:"";
+	display: table;
+	clear:both;
+}
+.addbtn {
+
+	padding: 10px;
+	width:25%;
+	background: #2673D8;
+	text-align: center;
+	float:left;
+	cursor: pointer;
+
+}
+.addbtn:hover {
+	background-color: green;
+}
+.close
+{
+	position: absolute;
+    cursor:pointer;
+	padding:1px 10px 2px 50px;      
+}
+.close:hover
+{
+	background-color: red;
+	color:white;
+}
+.do
+{
+	padding:1px 10px 2px 20px;
+}
+#mymodify
+{
+	display:none;
+	
+}
+.modify
+{
+	position :right;
+	cursor:pointer;
+	padding:1px 10px 1px 120px;
+}
+.modify:hover
+{
+	background-color: green;
+	color:white;
+}
+#photo
+{
+	background: url("dead.jpg") no-repeat;
+	background-size: cover;
+}
+
+</style>
+
+
+<body id="photo">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<h2>My contacts</h2>
+<div id="myDIV" class="header">
+	<input type="text" id="myinp" placeholder="Name....">
+	<span onclick= "unhide();" class="addbtn">Add</span><br><br><br>
+	<input type="text" id="myhidinp1" placeholder="Phone no...."><br><br><br>
+	<input type="text" id="myhidinp2" placeholder="Address....">
+	<span onclick="newelement(); hide();" id="do" class="addbtn" style="display:none">Done</span>
+</div>
+<br>
+<div id="mymodify">
+	<h2 style="margin:10px">Enter modified details</h2><br><br>
+	<input type="text" id="modnm" placeholder="name...">
+	<input type="text" id="modno" placeholder="phone no ...">
+	<input type="text" id="modad" placeholder="address...">
+	
+</div>
+<h2>Contacts</h2>
+<ul id="myul" >
+	<li style="visibility:hidden"></li>
+</ul>
+
+
+<script>
+	
+	
+	function unhide()
+	{
+		document.getElementById("myhidinp1").style.display = "block";
+		document.getElementById("myhidinp2").style.display = "block";
+		document.getElementById("do").style.display = "block";
+		
+	}
+	function hide()
+	{
+		document.getElementById("myhidinp1").style.display = "none";
+		document.getElementById("myhidinp2").style.display = "none";
+		document.getElementById("do").style.display = "none";
+	}
+	function unhide1()
+	{
+		document.getElementById("mymodify").style.display = "block";
+	}
+	function hide1()
+	{
+		document.getElementById("mymodify").style.display = "none";
+	}
+	
+	var close=document.getElementsByClassName("close");
+	var mylist=document.getElementsByTagName("li");
+	var modify=document.getElementsByClassName("modify");
+	var p;
+	function newelement()
+	{
+		var li=document.createElement("li");
+		var inputvalue=document.getElementById("myinp").value;
+		var t=document.createTextNode(inputvalue);
+		li.appendChild(t);
+
+		
+		var li1=document.createElement("SPAN");
+		li1.className="do";
+		var inp=document.getElementById("myhidinp1").value;
+		var t1=document.createTextNode(inp);
+		li1.appendChild(t1);
+
+		var li2=document.createElement("SPAN");
+		li2.className="do";
+		var inp1=document.getElementById("myhidinp2").value;
+		var t2=document.createTextNode(inp1);
+		li2.appendChild(t2);
+
+		var span=document.createElement("span");
+			var txt=document.createTextNode("Delete");
+			span.className="close";
+			span.appendChild(txt);
+			
+		
+		var span1=document.createElement("span");
+			var txt1=document.createTextNode("Modify");
+			span1.className="modify";
+			span1.appendChild(txt1);
+			
+				
+		if(inputvalue==="")
+		{
+			alert("Pls enter name")
+		}
+		else if (isNaN(inp)|| inp==="") 
+		{
+			alert("enter a number ")
+		}
+		else{
+				li.appendChild(li1);
+				li.appendChild(li2);
+				li.appendChild(span);
+				li.appendChild(span1);
+				document.getElementById("myul").appendChild(li);		
+		    }
+		document.getElementById("myinp").value="";
+		document.getElementById("myhidinp1").value="";
+		document.getElementById("myhidinp2").value="";
+		
+		var i;
+		for(i=0;i<close.length;i++)
+		{
+			close[i].onclick = function()
+			{
+				var div=this.parentElement;
+					div.style.display = "none";
+			
+			}
+		}
+				
+		var j;
+		for(j=0;j<modify.length;j++)
+		{
+			modify[j].onclick = function()
+			{
+				unhide1();
+				var temp=document.createElement("BUTTON");
+				var temptext=document.createTextNode("Modify");
+				temp.appendChild(temptext);
+				document.getElementById("mymodify").appendChild(temp);
+				temp.onclick = function()
+				{
+					if(document.getElementById("modnm").value==="")
+					{
+						alert("Enter name");
+					}
+					else if (isNaN(document.getElementById("modno").value)|| document.getElementById("modno").value==="") 
+					{
+						alert("Enter a number");
+					}
+					else
+					{
+					hide1();
+
+					var modinm=document.getElementById("modnm").value;
+					var modino=document.getElementById("modno").value;
+					var modiad=document.getElementById("modad").value;
+					mylist[j].childNodes[0].textContent=modinm;
+					mylist[j].childNodes[1].textContent=modino;
+					mylist[j].childNodes[2].textContent=modiad;
+					temp.remove();
+					}
+				}
+			}
+		}
+
+
+	}
+	function showedit(p)
+	{
+		var p;
+	}
+</script>
+</body>
+</html>
